@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-${username}.xml");
 		Person person = applicationContext.getBean(Person.class);
 		person.sayHello();
 	}

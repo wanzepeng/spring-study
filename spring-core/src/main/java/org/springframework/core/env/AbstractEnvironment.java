@@ -16,11 +16,7 @@
 
 package org.springframework.core.env;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -119,6 +115,7 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 	 * @see #customizePropertySources(MutablePropertySources)
 	 */
 	public AbstractEnvironment() {
+		// MutablePropertySources用来加载属性资源
 		this(new MutablePropertySources());
 	}
 
@@ -442,6 +439,11 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Map<String, Object> getSystemProperties() {
+		// 获取系统的属性值
+		Map<Object, Object> hashtable = System.getProperties();
+		System.out.println("SystemProperties------------------------------");
+		hashtable.forEach((k, v) -> System.out.println("key = " + k + " v = "+ v));
+
 		return (Map) System.getProperties();
 	}
 
@@ -451,6 +453,11 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 		if (suppressGetenvAccess()) {
 			return Collections.emptyMap();
 		}
+		// 获取环境值
+		Map<Object, Object> hashtable = (Map) System.getenv();
+		System.out.println("SystemEnvironment------------------------------");
+		hashtable.forEach((k, v) -> System.out.println("key = " + k + " v = "+ v));
+
 		return (Map) System.getenv();
 	}
 
